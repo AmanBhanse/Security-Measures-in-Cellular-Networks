@@ -153,6 +153,114 @@ The architecture of a GSM network is divided into several functional components,
 % AMAN - END
 
 
+% SOURAV ---- SECTION
+\section{LTE}
+\subsection{Overview of LTE Network Architecture}
+The architecture of a LTE network is divided into different functional components, each component is designed for specific purposes. Figure [] demonstrates the major components of the LTE network, which is composed of 3 major components: the User Equipment (UE), the Evolved Universal Terrestrial Radio Access Network (E-UTRAN), and the Evolved Packet Core (EPC).
+
+    
+
+\begin{itemize}
+    \item \textbf{User Equipment (UE)} : The Mobile Station consists of two essential parts:
+    \begin{itemize}
+        \item \textbf{Mobile Operating System }: The general-purpose system users interact with (e.g. Android, IOS).
+        \item \textbf{Telephony Subsystem}: It includes a baseband processor, which has its own operating system developed by the cellular SoC manufacturer to handle network communication\cite{cichonski2016guide}.
+
+    
+    \item  \textbf{Key components and identifiers in UE} : The Universal Integrated Circuit Card (UICC), a smart card inserted into the Mobile Equipment (ME) that stores personal data, cryptographic keys, and runs Java applications for network access; the International Mobile Equipment Identifier (IMEI), which uniquely identifies the device to the network; and the International Mobile Subscriber Identity (IMSI), which identifies the subscriber\cite{cichonski2016guide}.
+
+
+    
+\end{itemize}
+    \item \textbf{E-UTRAN} : UEs connect to the E-UTRAN to send data to the core network. The E-UTRAN is a mesh network composed of base stations. A base station, or Evolved Node B (eNodeB), modulates and demodulates radio signals to communicate with UEs. eNodeBs serves as a relay point to transmit IP packets to and from the man network. eNodeBs use the X2 interface to communicate with each other\cite{cichonski2016guide}. E-UTRAN comprises the following components: 
+
+    
+        
+    \begin{itemize}
+        \item \textbf{Evolved Node B (eNodeB or eNB)} : A base station is an eNodeB.
+     
+    \end{itemize}
+
+    \item \textbf{Evolved Packet Core (EPC)} : It is the most important component in LTE. It handles calls processing and subscriber management tasks. Following units are included in EPC:
+    \begin{itemize}
+        \item \textbf{Mobility Management Entity (MME)} : It is the main signaling node and does not engage with user traffic. It handles a wide range of capabilities, such as choosing the S-GW and P-GWs, sending pages, managing/storing UE contexts, generating temporary IDs, and controlling authentication procedures\cite{cichonski2016guide}.
+
+        \item \textbf{Serving Gateway (S-GW)} : Routes data between the P-GW and the E-UTRAN, anchors UEs for intra-eNodeB handoffs, and carries user plane data\cite{cichonski2016guide}.
+
+        \item \textbf{Packet Data Network Gateway (P-GW) } : It connects to non-3GPP networks, routes packets, and assigns IP addresses\cite{cichonski2016guide}.
+
+        \item \textbf{Home Subscriber Server (HSS) } : Holds the secret key K and is a master database containing subscriber data\cite{cichonski2016guide}.
+
+        \item \textbf{Authentication Center (AuC) } : It is located inside the HSS, it executes cryptographic computations during authentication and associates long-term identities with pre-shared cryptographic keys\cite{cichonski2016guide}.
+
+        \item \textbf{Policy and Charging Rules Function (PCRF) } : The PCRF distributes and enforces rules and regulations to the P-GW concerning billing, network resource access, and quality of service (QoS)\cite{cichonski2016guide}.
+
+\begin{figure}
+            \centering
+            \includegraphics[width=0.9\linewidth]{Assets/lte_architecture.png}
+            \caption{Architecture of LTE Network} \cite{cichonski2016guide}
+            \label{fig:enter-label}
+        \end{figure}
+    \end{itemize}
+    
+\end{itemize}
+
+\subsection{Security Measures in LTE}
+The LTE security framework is designed to provide robust protection for user data and signaling while addressing the unique requirements of modern cellular networks.
+\begin{itemize}
+    \item \textbf{Cryptography}: 
+    Cryptographic algorithms used for confidentiality and authentication in 2G systems, such as A3, A5, and A8, were proprietary. New cryptographic standards EEA1/EIA1 (SNOW 3G), EEA2/EIA2 (AES), and EEA3/EIA3 (ZUC) were added by LTE\cite{cichonski2016guide}. A more intricate key structure that supports 256-bit keys—although many implementations still utilise 128 bits—was also included. Additionally, LTE enhances security and flexibility by enabling distinct cryptographic methods for the control and user planes\cite{cao2013survey}
+
+    \item \textbf{Hardware Security}: 
+    The Universal Integrated Circuit Card (UICC) serves as the foundation of LTE's security architecture. The UICC (Universal Integrated Circuit Card) is an advanced SIM card integral to LTE security, hosting the Universal Subscriber Identity Module (USIM) application responsible for critical functions like authentication and cryptographic operations. Equipped with a processor, memory, and network awareness, and can facilitate NFC. The main function of the UICC is storing the pre-shared cryptographic key (K), crucial for LTE's security framework. It is used to derive the session master key (KASME). The UICC collaborates with the HSS and MME for cryptographic operations, subscriber authentication, and storing security contexts. It also secures critical identities like IMSI and IMEI. Additionally, a PIN can be configured on the UICC, preventing unauthorized access if the card is stolen or moved to another device\cite{cichonski2016guide}.
+
+    \item \textbf{UE Authentication in LTE}: 
+    LTE uses the Authentication and Key Agreement (AKA) protocol \cite{cao2013survey} to verify that the UICC and the network share the secret key (K)[]. This process ensures mutual authentication between the UICC and the LTE network but does not authenticate the user or device directly. During the attach process, the UE sends its identifier (e.g., IMSI, TMSI, or GUTI) to the MME, which forwards it to the HSS/AuC. The HSS generates an authentication vector (AUTN) using inputs like K, a random nonce (RAND), and a sequence number (SQN)\cite{cichonski2016guide}. This vector, including the expected result (XRES) and AUTN, is sent back to the UE via the MME. The USIM performs cryptographic calculations using K and SQN to produce a response (RES), which is sent to the MME. If RES matches XRES, authentication is successful, granting the UE network access\cite{cao2013survey}.
+
+    \item \textbf{Air Interface Security in LTE}: 
+    In LTE, the communication between the User Equipment (UE) and the eNodeB takes place over the air interface (Uu interface), which involves radio frequency (RF) signals. These RF signals can be intercepted, making security critical. The security parameters for a connection are negotiated using the Security Mode Command (SMC). The cryptographic algorithm negotiation between the UE and the network is done, ensuring the selection of appropriate security measures for ciphering, user plane protection, and Non-Access Stratum (NAS) integrity. Security configurations are done separately at the Access Stratum (AS) and NAS levels. Once the security procedures are completed, a security context is established, which stores session keys but not long-term identifiers like IMSI or IMEI. This context can be reused for future connections, reducing unnecessary authentication processes, and minimizing network congestion\cite{cichonski2016guide}.
+
+    \item \textbf{E-UTRAN Security in LTE}: 
+    The E-UTRAN connects the UE to the core network in LTE, facilitating essential functions like mobility. A critical feature of E-UTRAN is handover, allowing users to maintain continuous service while moving across different areas. The handover process involves communication between base stations via the X2 interface.There are two types of handovers in LTE: X2 handover and S1 handover. In S1 handover, the MME is aware of the handover in advance, allowing it to refresh cryptographic parameters before the connection is severed. In contrast, X2 handover occurs directly between eNodeBs, with the MME unaware, and fresh keying material is provided only after the handover. During the handover, new session keys are generated to ensure security, but a new master session key (KASME) is not created. The KeNB key is used to generate a new key, KeNB*, which protects the new session post-handover. Importantly, the previous session's keys are not shared between the source eNodeB and the new eNodeB, ensuring the security of the new session\cite{cichonski2016guide}.
+
+
+    \item \textbf{Backhaul Security}: 
+    Backhaul security in LTE networks focuses on safeguarding data transmission between eNodeBs and the Evolved Packet Core (EPC) over the S1 interface. Ensuring physical protection is challenging, as Mobile Network Operators (MNOs) often rely on third-party infrastructure for backhaul connections. Security measures, such as IPsec tunnels with pre-shared keys or digital certificates, help encrypt data over untrusted interfaces\cite{cichonski2016guide}.
+
+
+\end{itemize}
+
+\subsection{Threats to LTE Network}
+The use of LTE network has increased tremendously and so have been the attacks and threats to the LTE network as well. Attacks like Denial of Service(DoS) and Distributed Denial of Service (DDoS) \cite{kamel2014survey}have an affect on availability of the LTE network. Some of the threats are discussed below.
+
+\begin{enumerate}
+            \item \textbf{Radio jamming}:
+            In order to interfere with communications by lowering the signal to noise ratio, radio jamming is used to hamper the transmission of radio signals.  Finding and stopping the jamming device is one method of stopping this attack\cite{jover2013security}.
+
+            \item \textbf{Jamming Attacks}:
+            Jamming attacks disrupt LTE network services by transmitting noise or static over specific frequencies, thus interfering with the communication between User Equipment (UE) and eNodeBs\cite{jover2013security}. Uplink smart jamming us used as it rejects services to all the users which are present in the focused area\cite{jover2014enhancing}.
+
+            \item \textbf{Cryptographic Key Attacks (Attacks Against K)}:
+            The cryptographic keys (denoted as 'K') in LTE systems are crucial for ensuring security at multiple levels. If an attacker gains access to this key, they could impersonate subscribers, decrypt communications, and bypass security measures across the network. This could lead to severe privacy breaches and unauthorized access to services\cite{cichonski2016guide}. 
+
+            \item \textbf{Backhaul and Core Eavesdropping}:
+            The backhaul connection links the LTE core network to the eNodeBs. If encryption is not used on this critical interface, attackers could intercept and listen to communications between cell sites and the core network. This vulnerability could lead to the theft of sensitive network information or user data\cite{cichonski2016guide}. 
+
+            \item \textbf{Botnet of mobile devices}:
+            Mobile botnets can be used in Distributed Denial of Service (DDoS) attacks on cellular networks to flood the network with malicious data or signalling signals\cite{cichonski2016guide}. 
+
+            \item \textbf{Insider attacks}:
+            Mobility networks are seriously threatened by insider assaults, despite the fact that they are frequently ignored. If a mischievous insider targets important nodes like the HSS, they could interfere with network availability\cite{cichonski2016guide}. 
+
+            \item \textbf{Downgrade Attacks}:
+            Downgrade attacks exploit LTE’s backward compatibility with older cellular technologies (such as 2G or 3G). Attackers can force a UE to connect to these older networks, which use less secure encryption and authentication protocols,2 so that attackers can bypass the strong security of LTE and subject communications to vulnerabilities like eavesdropping, data interception, and man in the middle attacks\cite{cao2013survey}.
+ 
+
+             
+        \end{enumerate}
+% SOURAV - END
+
+
 % ADITHIYA ---- SECTION
 % ADITHIYA - END
 
@@ -173,7 +281,7 @@ As much as it is true that GSM was an important stage in mobile security but its
 
 % References
 \bibliographystyle{plain}
-\bibliography{gsm_ref}
+\bibliography{gsm_ref, lte_ref}
 
 
 \end{document}
