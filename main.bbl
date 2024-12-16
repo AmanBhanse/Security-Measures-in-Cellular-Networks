@@ -1,0 +1,37 @@
+\begin{thebibliography}{1}
+
+\bibitem{kaur2012review}
+Gurjeet Kaur, Pawansupreet Kaur, and Krishan~Kumar Saluja.
+\newblock A review of security issues and mitigation measures in gsm.
+\newblock {\em International Journal of Research in Engineering \& Applied Sciences}, 2(2):16, 2012.
+
+\bibitem{lord2003modern}
+S~Lord.
+\newblock Modern gsm insecurities.
+\newblock {\em X-Force Security Assessments White Paper}, 2003.
+
+\bibitem{margrave1999gsm}
+David Margrave.
+\newblock Gsm security and encryption.
+\newblock {\em George Mason University}, pages 1--5, 1999.
+
+\bibitem{quirke2004security}
+Jeremy Quirke.
+\newblock Security in the gsm system.
+\newblock {\em AusMobile, May}, pages 1--26, 2004.
+
+\bibitem{rao2002partitioning}
+Josyula~R Rao, Pankaj Rohatgi, Helmut Scherzer, and Stephane Tinguely.
+\newblock Partitioning attacks: or how to rapidly clone some gsm cards.
+\newblock In {\em Proceedings 2002 IEEE Symposium on Security and Privacy}, pages 31--41. IEEE, 2002.
+
+\bibitem{sidharsancomplete}
+S~Sidharsan.
+\newblock A complete guide to sim cloning.
+
+\bibitem{singh2013gsm}
+Jaspreet Singh, Ron Ruhl, and Dale Lindskog.
+\newblock Gsm ota sim cloning attack and cloning resistance in eap-sim and usim.
+\newblock In {\em 2013 International Conference on Social Computing}, pages 1005--1010. IEEE, 2013.
+
+\end{thebibliography}
