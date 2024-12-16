@@ -1,0 +1,51 @@
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+
+# PDF and other output files
+*.pdf
+*.dvi
+*.ps
+*.eps
+*.xdv
+
+# Editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup and temporary files
+*~
+*.backup
+*.cache
+*.latexmk
+
+# Files for specific LaTeX packages
+*.synctex(busy)
+
+# Output directories
+_build/
+output/
